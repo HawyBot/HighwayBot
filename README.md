@@ -18,7 +18,7 @@ A different way to digging and building Highway Nether in every Anarchy server!
 <details> 
     <summary>Casual Installation</summary>
 
-> Download zip file: https://github.com/HackerShader/HighwayBot/archive/refs/heads/installer.zip
+> Download zip file: https://github.com/HighwayBot/HighwayBot/archive/refs/heads/installer.zip
 
 > For Windows OS: execute installer.vbs
 
