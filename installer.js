@@ -12,7 +12,7 @@ run()
 async function resolve(host) {
     const dns = require('node:dns');
     return new Promise((resolve) => dns.resolve(host, (err) => {
-        if (err) resolve(err) 
+        if (err) resolve(err)
         else resolve(true)
     }))
 }
@@ -34,8 +34,26 @@ async function run() {
             '[!] You are not connected to the internet.' + '\n' +
             '[#] Please connect to the internet and try again.\n' +
             '[!] Exit after 10s'
-        )
+            )
         await require('timers/promises').setTimeout(10 * 1000)
+        return;
+    }
+    const version = {
+        current: /^(.+).(.+).(.+)$/.exec(process.version),
+        recommended: ['v16', 'v18', 'v19', 'v20']
+    };
+
+    if (!version.recommended.includes(version.current[1])) {
+        console.log(`[!] Nodejs version in your machine is not supported! Please install the latest LTS version or higher` +
+            `\n    Current Nodejs version: ${version.current[0]}` +
+            `\n    Supported version: ${version.recommended.toString()}` +
+            `\n    More infomation at: https://nodejs.org/en/download` +
+            `\n    Shutting down after 30 seconds`
+        )
+        setTimeout(() => {
+            process.exit(0)
+        }, 30000);
+        return;
     } else countdown()
 }
 
@@ -134,7 +152,7 @@ function delete_temp() {
 
 function restart() {
     const newdate = new Date().getTime()
-    console.log(`[#] Installed HighwayBot. This process took ${((newdate - date)/1000).toFixed(1)} seconds`)
+    console.log(`[#] Installed HighwayBot. This process took ${((newdate - date) / 1000).toFixed(1)} seconds`)
     stdout('[-] Shut down after 10s', true);
     setTimeout(() => {
         stdout('[#] Shutting down...');
